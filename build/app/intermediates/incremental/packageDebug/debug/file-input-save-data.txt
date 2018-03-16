@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Mar 15 22:28:15 EDT 2018
+#Fri Mar 16 01:17:29 EDT 2018
 4.path=flutter_assets/LICENSE
 8.set=NATIVE_RESOURCE
 6.path=flutter_assets/FontManifest.json
@@ -40,4 +40,4 @@ count=10
 9.baseType=DIRECTORY
 0.path=flutter_assets/fonts/MaterialIcons-Regular.ttf
 1.set=NATIVE_RESOURCE
-2.path=lib/armeabi-v7a/libflutter.so
+2.path=lib/arm64-v8a/libflutter.so
