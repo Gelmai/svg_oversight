@@ -12,7 +12,7 @@ class _AddPersonState extends State<AddPerson> {
   
 String nameFirst = "";
 String nameLast = "";
-int personNumber;
+
 
   
   @override
@@ -23,6 +23,7 @@ int personNumber;
         child: new Icon(Icons.check), 
         onPressed: () {
           addPerson(nameFirst, nameLast);
+          new SnackBar(content: new Text(masterList[personCounter - 1].firstName + " added"),);
           Navigator.of(context).pop();
         }),
       body: new Material(

@@ -14,8 +14,9 @@ class _PersonDetailState extends State<PersonDetail> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar( centerTitle: true, title: new Text(masterList[currentPersonId].firstName +" "+ masterList[currentPersonId].lastName),),
-      body: new Text("Person Id: " + currentPersonId.toString())
-       
+      body: new Center(
+        child: new Text("Person Id: " + currentPersonId.toString(), style: new TextStyle(fontSize: 30.0), )
+      )
     );
   }
 }
