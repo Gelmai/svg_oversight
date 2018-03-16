@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-import '../pages/add_person.dart';
-import '../pages/home_page.dart';
 
 class Person {
   String firstName = "";
   String lastName = "";
+  String notes = "";
   int personId;
+  
   int length =0;
 
   Person(this.firstName, this.lastName, this.personId);
@@ -17,16 +16,14 @@ class Person {
    }
    
 }
-
+int personCounter = 0;
 int currentPersonIndex = 0;
 List<Person> masterList = [];
 
 
 void addPerson(firstName, lastName) {
-  Person newPerson = new Person(firstName, lastName, currentPersonIndex);
-  currentPersonIndex++;
+  Person newPerson = new Person(firstName, lastName, personCounter);
+  personCounter++;
   masterList.add(newPerson);
-  print(newPerson.firstName + "added!");
+  print(newPerson.firstName + " added!");
 }
-
-

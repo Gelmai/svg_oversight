@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import './home_page.dart';
+
 import '../utils/person.dart';
 
 class AddPerson extends StatefulWidget {
   @override
   _AddPersonState createState() => new _AddPersonState();
 }
-
 
 
 class _AddPersonState extends State<AddPerson> {
@@ -31,6 +30,7 @@ int personNumber;
           padding: new EdgeInsets.symmetric( horizontal: 10.0),
           child: new Column(
             children: <Widget>[
+              new Padding(padding: new EdgeInsets.symmetric(vertical: 10.0),),
               new TextField(
                 decoration: new InputDecoration(
                   hintText: "First name"
@@ -41,7 +41,7 @@ int personNumber;
                   });
                 },
               ),
-              new Padding(padding: new EdgeInsetsDirectional.only( bottom: 10.0),),
+              new Padding(padding: new EdgeInsets.symmetric(vertical: 10.0),),
               new TextField(
                 decoration: new InputDecoration(
                   hintText: "Last name"

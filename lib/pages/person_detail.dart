@@ -12,10 +12,10 @@ class _PersonDetailState extends State<PersonDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return new Column(
-       children: <Widget>[
-         new Text("test")
-       ],
+    return new Scaffold(
+      appBar: new AppBar( centerTitle: true, title: new Text(masterList[currentPersonId].firstName +" "+ masterList[currentPersonId].lastName),),
+      body: new Text("Person Id: " + currentPersonId.toString())
+       
     );
   }
 }
