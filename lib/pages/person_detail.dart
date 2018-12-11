@@ -15,7 +15,18 @@ class _PersonDetailState extends State<PersonDetail> {
     return new Scaffold(
       appBar: new AppBar( centerTitle: true, title: new Text(masterList[currentPersonId].firstName +" "+ masterList[currentPersonId].lastName),),
       body: new Center(
-        child: new Text("Person Id: " + currentPersonId.toString(), style: new TextStyle(fontSize: 30.0), )
+        child: Column(
+          children: <Widget>[
+            Text("Person Id: " + currentPersonId.toString(), style: new TextStyle(fontSize: 30.0), ),
+            RaisedButton(
+              child: Text('Delete Person'),
+              onPressed: () {
+                deletePerson(currentPersonId);
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        ) 
       )
     );
   }

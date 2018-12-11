@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../utils/person.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +12,9 @@ class _HomePageState extends State<HomePage> {
   
   @override 
   void initState(){
+    loadFile();
+    setState(() {
+    });       
     super.initState();
   }
 
