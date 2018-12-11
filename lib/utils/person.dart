@@ -50,13 +50,17 @@ void addPerson(firstName, lastName) {
   saveFile();
 }
 
+void deletePerson(index) {
+  masterList.removeAt(index);
+}
+
 void saveFile() async {
   final String storedPersonKey = 'gelmaiSVGOversight';
   SharedPreferences sp = await (SharedPreferences.getInstance());
   sp.setString(storedPersonKey, json.encode(masterList));
 }
 
-void loadFile() async {
+Future loadFile() async {
   final String storedPersonKey = 'gelmaiSVGOversight';
   SharedPreferences sp = await (SharedPreferences.getInstance());
   json

@@ -6,6 +6,7 @@ import './pages/person_detail.dart';
 void main() {
   runApp(
     new MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: new HomePage(),
       routes: <String, WidgetBuilder> {
         "/AddPerson": (BuildContext context) => new AddPerson(),

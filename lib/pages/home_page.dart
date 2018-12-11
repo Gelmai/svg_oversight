@@ -13,6 +13,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState(){
     loadFile();
+    setState(() {
+    });       
     super.initState();
   }
 
