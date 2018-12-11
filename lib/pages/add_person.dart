@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../utils/person.dart';
 
 class AddPerson extends StatefulWidget {
