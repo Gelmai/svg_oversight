@@ -21,9 +21,14 @@ String nameLast = "";
       floatingActionButton: new FloatingActionButton(
         child: new Icon(Icons.check), 
         onPressed: () {
-          addPerson(nameFirst, nameLast);
-          new SnackBar(content: new Text(masterList[personCounter - 1].firstName + " added"),);
-          Navigator.of(context).pop();
+          if (nameFirst <> "" || nameLast <> "") {
+            addPerson(nameFirst, nameLast);
+            new SnackBar(content: new Text(masterList[personCounter - 1].firstName + " added"),);
+            Navigator.of(context).pop();
+          } else {
+            Scaffold.of(context).showSnackBar(SnackBar(content: Text('Name fields are required')));
+          }
+          
         }),
       body: new Material(
         child: new Container(
