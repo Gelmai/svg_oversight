@@ -7,15 +7,14 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => new _HomePageState();
 }
 
-int currentPersonId;
+int currentIndex;
+
 
 class _HomePageState extends State<HomePage> {
   
   @override 
   void initState(){
-    loadFile();
-    setState(() {
-    });       
+    loadFile();  
     super.initState();
   }
 
@@ -27,21 +26,35 @@ class _HomePageState extends State<HomePage> {
         onPressed: () => Navigator.of(context).pushNamed("/AddPerson"), 
         child: new Icon(Icons.add)), 
           appBar: new AppBar(title: new Text("Group Members")),
-          body: new ListView.builder(
-            itemCount: masterList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return new Material(
-                child: new InkWell(
-                  onTap: () {
-                    currentPersonId = index;
-                    Navigator.of(context).pushNamed("/PersonDetail"); //masterList[i].firstName,
-                  },
-                  child: new ListTile(
-                    leading: new Icon(Icons.person),
-                    title: new Text("${masterList[index].lastName}, ${masterList[index].firstName}" , style: new TextStyle(fontSize: 30.0),)
-                  )
-                )
-              );
+          body: FutureBuilder(
+            future: listLoaded(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data!=null) {
+                  return ListView.builder(
+                    itemCount: masterList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return new Material(
+                        child: new InkWell(
+                          onTap: () {
+                            currentIndex = index;
+                            Navigator.of(context).pushNamed("/PersonDetail"); //masterList[i].firstName,
+                          },
+                          child: new ListTile(
+                            key: Key(masterList[index].personId.toString()),
+                            leading: new Icon(Icons.person),
+                            title: new Text("${masterList[index].lastName}, ${masterList[index].firstName}" , style: new TextStyle(fontSize: 30.0),)
+                          )
+                        )
+                      );
+                    }
+                  );
+                } 
+              } else {
+                  return Center(
+                    child: CircularProgressIndicator()
+                    );
+                }
             }
           )
     );
