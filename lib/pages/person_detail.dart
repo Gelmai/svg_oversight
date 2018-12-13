@@ -18,7 +18,7 @@ class _PersonDetailState extends State<PersonDetail> {
         child: Column(
           children: <Widget>[
             Text("List index: " + currentIndex.toString(), style: new TextStyle(fontSize: 30.0), ),
-            Text("Global Person Id: " + globalPersonCounter.toString(), style: new TextStyle(fontSize: 30.0), ),
+            Text("Global Person Id: " + masterList[currentIndex].personId.toString(), style: new TextStyle(fontSize: 30.0), ),
             RaisedButton(
               child: Text('Delete Person'),
               onPressed: () {
