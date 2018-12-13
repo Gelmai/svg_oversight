@@ -11,56 +11,60 @@ class _AddPersonState extends State<AddPerson> {
   
 String nameFirst = "";
 String nameLast = "";
+final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
-
+void createSnackBar(String message) {
+  final snackBar = SnackBar(content: Text(message),);
+  scaffoldKey.currentState.showSnackBar(snackBar);
+}
   
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      key: scaffoldKey,
       appBar: new AppBar(title: new Text("New goup member"),),
       floatingActionButton: new FloatingActionButton(
         child: new Icon(Icons.check), 
         onPressed: () {
-          if (nameFirst <> "" || nameLast <> "") {
-            addPerson(nameFirst, nameLast);
-            new SnackBar(content: new Text(masterList[personCounter - 1].firstName + " added"),);
-            Navigator.of(context).pop();
+          if (nameFirst == "" || nameLast == "") {
+            createSnackBar('Name fields are required!');
           } else {
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text('Name fields are required')));
+            addPerson(nameFirst, nameLast);
+            Navigator.of(context).pop();
+            createSnackBar(masterList[personCounter - 1].firstName + 'added');
           }
-          
         }),
       body: new Material(
-        child: new Container(
-          padding: new EdgeInsets.symmetric( horizontal: 10.0),
-          child: new Column(
-            children: <Widget>[
-              new Padding(padding: new EdgeInsets.symmetric(vertical: 10.0),),
-              new TextField(
-                decoration: new InputDecoration(
-                  hintText: "First name"
+          child: new Container(
+            padding: new EdgeInsets.symmetric( horizontal: 10.0),
+            child: Column(
+              children: <Widget>[
+                new Padding(padding: new EdgeInsets.symmetric(vertical: 10.0),),
+                new TextField(
+                  decoration: new InputDecoration(
+                    hintText: "First name"
+                  ),
+                  onChanged: (String str) {
+                    setState(() {
+                      nameFirst = str;
+                    });
+                  },
                 ),
-                onChanged: (String str) {
-                  setState(() {
-                    nameFirst = str;
-                  });
-                },
-              ),
-              new Padding(padding: new EdgeInsets.symmetric(vertical: 10.0),),
-              new TextField(
-                decoration: new InputDecoration(
-                  hintText: "Last name"
+                new Padding(padding: new EdgeInsets.symmetric(vertical: 10.0),),
+                new TextField(
+                  decoration: new InputDecoration(
+                    hintText: "Last name"
+                  ),
+                  onChanged: (String str) {
+                    setState(() {
+                      nameLast = str;
+                    });
+                  },
                 ),
-                onChanged: (String str) {
-                  setState(() {
-                    nameLast = str;
-                  });
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
