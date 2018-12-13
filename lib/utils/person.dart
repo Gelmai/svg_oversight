@@ -50,12 +50,18 @@ void addPerson(firstName, lastName) {
   globalPersonCounter++;
   newPerson.personId = globalPersonCounter;
   masterList.add(newPerson);
+  masterList.sort((a, b) {
+    return a.personLastName.toString().toLowerCase().compareTo(b.personLastName.toString().toLowerCase());
+  });
   print(newPerson.firstName + " added!");
   saveFile();
 }
 
 void deletePerson(index) {
   masterList.removeAt(index);
+  masterList.sort((a, b) {
+    return a.personLastName.toString().toLowerCase().compareTo(b.personLastName.toString().toLowerCase());
+  });
   saveFile();
 }
 
@@ -73,12 +79,12 @@ Future loadFile() async {
   final String storedPersonKey = 'gelmaiSVGOversight';
   final String storedCounter = 'gelmaiSVGOversightCounter';
 
-  SharedPreferences sp = await (SharedPreferences.getInstance());
-  await json
-    .decode(sp.getString(storedPersonKey))
-    .forEach((map) => masterList.add(new Person.fromJson(map)));
-  
   try {
+    SharedPreferences sp = await (SharedPreferences.getInstance());
+    await json
+      .decode(sp.getString(storedPersonKey))
+      .forEach((map) => masterList.add(new Person.fromJson(map)));
+  
     globalPersonCounter = await json.decode(sp.getString(storedCounter));
   } catch (e) { 
     print(e);
