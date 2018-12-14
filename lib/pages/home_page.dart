@@ -42,10 +42,18 @@ class _HomePageState extends State<HomePage> {
                           },
                           child: new ListTile(
                             key: Key(masterList[index].personId.toString()),
-                            leading: new Icon(Icons.person),
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.indigo[100],
+                              child: Text('${masterList[index].firstName.substring(0,1)}${masterList[index].lastName.substring(0,1)}',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20.0
+                                ),
+                                ),  
+                            ),
                             title: new Text("${masterList[index].lastName}, ${masterList[index].firstName}" , style: new TextStyle(fontSize: 30.0),)
                           )
-                        )
+                        ),
                       );
                     }
                   );
