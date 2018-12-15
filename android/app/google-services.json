@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "750650848525",
+    "firebase_url": "https://svg-oversight.firebaseio.com",
+    "project_id": "svg-oversight",
+    "storage_bucket": "svg-oversight.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750650848525:android:f7d7e79bed8bc10d",
+        "android_client_info": {
+          "package_name": "com.example.svgoversight"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750650848525-mptmhn2gnsuh1ajdubfgacifbjf3qj9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBouYAxMed52M7xOjkpDtZiKUiyQyMPUns"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
