@@ -29,40 +29,44 @@ class _HomePageState extends State<HomePage> {
           body: FutureBuilder(
             future: listLoaded(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                if (snapshot.data!=null) {
-                  return ListView.builder(
-                    itemCount: masterList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return new Material(
-                        child: new InkWell(
-                          onTap: () {
-                            currentIndex = index;
-                            Navigator.of(context).pushNamed("/PersonDetail"); //masterList[i].firstName,
-                          },
-                          child: new ListTile(
-                            key: Key(masterList[index].personId.toString()),
-                            leading: CircleAvatar(
-                              backgroundColor: Colors.indigo[100],
-                              child: Text('${masterList[index].firstName.substring(0,1)}${masterList[index].lastName.substring(0,1)}',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20.0
-                                ),
-                                ),  
-                            ),
-                            title: new Text("${masterList[index].lastName}, ${masterList[index].firstName}" , style: new TextStyle(fontSize: 30.0),)
-                          )
-                        ),
-                      );
-                    }
-                  );
-                } 
+              if (masterList == null) {
+                return Container();
               } else {
+                if (snapshot.hasData) {
+                  if (snapshot.data!=null) {
+                    return ListView.builder(
+                      itemCount: masterList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return new Material(
+                          child: new InkWell(
+                            onTap: () {
+                              currentIndex = index;
+                              Navigator.of(context).pushNamed("/PersonDetail"); //masterList[i].firstName,
+                            },
+                            child: new ListTile(
+                              key: Key(masterList[index].personId.toString()),
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.indigo[100],
+                                child: Text('${masterList[index].firstName.substring(0,1)}${masterList[index].lastName.substring(0,1)}',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20.0
+                                  ),
+                                  ),  
+                              ),
+                              title: new Text("${masterList[index].lastName}, ${masterList[index].firstName}" , style: new TextStyle(fontSize: 30.0),)
+                            )
+                          ),
+                        );
+                      }
+                    );
+                  } 
+                } else {
                   return Center(
                     child: CircularProgressIndicator()
-                    );
+                  );
                 }
+              }
             }
           )
     );
