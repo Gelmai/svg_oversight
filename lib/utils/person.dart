@@ -70,26 +70,33 @@ void deletePerson(index) {
 }
 
 void saveFile() async {
-  final String storedPersonKey = 'gelmaiSVGOversight';
-  final String storedCounter = 'gelmaiSVGOversightCounter';
+  // final String storedPersonKey = 'gelmaiSVGOversight';
+  // final String storedCounter = 'gelmaiSVGOversightCounter';
   
-  SharedPreferences sp = await (SharedPreferences.getInstance());
-  sp.setString(storedPersonKey, json.encode(masterList));
-  sp.setString(storedCounter, json.encode(globalPersonCounter));
-  print(globalPersonCounter);
+  // SharedPreferences sp = await (SharedPreferences.getInstance());
+  // sp.setString(storedPersonKey, json.encode(masterList));
+  // sp.setString(storedCounter, json.encode(globalPersonCounter));
+  // print(globalPersonCounter);
+  final file = await _localFile;
+  file.writeAsString(json.encode(masterList));
 }
 
 Future loadFile() async {
-  final String storedPersonKey = 'gelmaiSVGOversight';
-  final String storedCounter = 'gelmaiSVGOversightCounter';
+  // final String storedPersonKey = 'gelmaiSVGOversight';
+  // final String storedCounter = 'gelmaiSVGOversightCounter';
 
   try {
-    SharedPreferences sp = await (SharedPreferences.getInstance());
-    await json
-      .decode(sp.getString(storedPersonKey))
-      .forEach((map) => masterList.add(new Person.fromJson(map)));
+    // SharedPreferences sp = await (SharedPreferences.getInstance());
+    // await json
+    //   .decode(sp.getString(storedPersonKey))
+    //   .forEach((map) => masterList.add(new Person.fromJson(map)));
   
-    globalPersonCounter = await json.decode(sp.getString(storedCounter));
+    // globalPersonCounter = await json.decode(sp.getString(storedCounter));
+    final file = await _localFile;
+    final contents = await file.readAsString();
+    await json
+      .decode(contents)
+      .forEach((map) => masterList.add(new Person.fromJson(map)));
   } catch (e) { 
     print(e);
   }
