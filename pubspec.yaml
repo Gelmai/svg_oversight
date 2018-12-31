@@ -9,6 +9,9 @@ dependencies:
   intl:
   path_provider:
     
+  cloud_firestore:
+
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

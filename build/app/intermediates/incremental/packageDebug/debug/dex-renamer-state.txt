@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 #Fri Dec 14 12:50:49 EST 2018
 base.0=C\:\\Users\\gelma\\Documents\\flutter projects\\svg_oversight\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+=======
+#Fri Dec 14 22:31:58 EST 2018
+base.0=C\:\\Users\\Juju\\Documents\\svg_oversight\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+>>>>>>> f3c18e1ceb86a0428d82e5d4cd59432869925bc5
 path.0=classes.dex
 renamed.0=classes.dex
