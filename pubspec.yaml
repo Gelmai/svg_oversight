@@ -7,7 +7,7 @@ dependencies:
   cupertino_icons: ^0.1.0
   shared_preferences:
   intl:
-  path_provider:
+  path_provider: ^0.4.1
   cloud_firestore:
 
   

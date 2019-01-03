@@ -14,8 +14,8 @@ class _HomePageState extends State<HomePage> {
   
   @override 
   void initState(){
-    loadFile();  
     super.initState();
+    loadFile();
   }
 
   @override
@@ -30,7 +30,9 @@ class _HomePageState extends State<HomePage> {
             future: listLoaded(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (masterList == null) {
-                return Container();
+                return Container(
+                  color: Colors.redAccent[100],
+                );
               } else {
                 if (snapshot.hasData) {
                   if (snapshot.data!=null) {

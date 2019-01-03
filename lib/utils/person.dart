@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 import 'dart:async';
 
@@ -97,13 +97,13 @@ Future loadFile() async {
     await json
       .decode(contents)
       .forEach((map) => masterList.add(new Person.fromJson(map)));
+    listLoaded();
   } catch (e) { 
     print(e);
   }
 }
 
 Future<String> listLoaded() async {
-   while (masterList == []) {} 
    return '';
 }
 
