@@ -28,11 +28,11 @@ class Person {
     personId = p['personId'];
    }
 
-  //  String get personFirstName => firstName;
-  //  String get personLastName => lastName;
-  //  String get personLastShepherded => lastShepherded.toString();
-  //  String get personNotes => notes;
-  //  String get personStoredId => personId.toString();
+   String get personFirstName => firstName;
+   String get personLastName => lastName;
+   String get personLastShepherded => lastShepherded.toString();
+   String get personNotes => notes;
+   String get personStoredId => personId.toString();
 
    Map<String, dynamic> toJson() => {
      'firstName': firstName,
