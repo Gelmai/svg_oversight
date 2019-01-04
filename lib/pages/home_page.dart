@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/person.dart';
-import 'add_person.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,14 +8,18 @@ class HomePage extends StatefulWidget {
 }
 
 int currentIndex;
-
+Future<String> listTrigger;
 
 class _HomePageState extends State<HomePage> {
   
   @override 
   void initState(){
     super.initState();
-    loadFile();
+    loadFile().then((String value) {
+      setState(() {
+           
+            });
+    });
   }
 
   @override

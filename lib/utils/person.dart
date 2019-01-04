@@ -28,11 +28,11 @@ class Person {
     personId = p['personId'];
    }
 
-   String get personFirstName => firstName;
-   String get personLastName => lastName;
-   String get personLastShepherded => lastShepherded.toString();
-   String get personNotes => notes;
-   String get personStoredId => personId.toString();
+  //  String get personFirstName => firstName;
+  //  String get personLastName => lastName;
+  //  String get personLastShepherded => lastShepherded.toString();
+  //  String get personNotes => notes;
+  //  String get personStoredId => personId.toString();
 
    Map<String, dynamic> toJson() => {
      'firstName': firstName,
@@ -81,7 +81,7 @@ void saveFile() async {
   file.writeAsString(json.encode(masterList));
 }
 
-Future loadFile() async {
+Future<String> loadFile() async {
   // final String storedPersonKey = 'gelmaiSVGOversight';
   // final String storedCounter = 'gelmaiSVGOversightCounter';
 
@@ -98,8 +98,10 @@ Future loadFile() async {
       .decode(contents)
       .forEach((map) => masterList.add(new Person.fromJson(map)));
     listLoaded();
+    return '';
   } catch (e) { 
     print(e);
+    return '';
   }
 }
 
