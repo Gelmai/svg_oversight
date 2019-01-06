@@ -55,8 +55,31 @@ class _PersonDetailState extends State<PersonDetail> {
           IconButton(                           //DELETE Button
             icon: Icon(Icons.delete),
             onPressed: () {
-              deletePerson(currentIndex);
-              Navigator.of(context).pop();
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Delete person?'),
+                    content: Text('This cannot be undone.'),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text('Cancel'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      RaisedButton(
+                        child: Text('Delete', style: TextStyle(color: Colors.white),),
+                        onPressed: () {
+                          Navigator.of(context).popUntil(ModalRoute.withName('/'));
+                          deletePerson(currentIndex);
+                          //setState(() {});
+                        },
+                      )
+                    ],
+                  );
+                }
+              );
             },
           )
         ],
