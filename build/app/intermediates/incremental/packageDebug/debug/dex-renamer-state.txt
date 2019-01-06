@@ -1,4 +1,4 @@
-#Sat Jan 05 22:17:24 EST 2019
+#Sat Jan 05 23:19:51 EST 2019
 base.0=/home/juju/AndroidStudioProjects/svg_oversight/build/app/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

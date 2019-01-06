@@ -8,7 +8,6 @@ class HomePage extends StatefulWidget {
 }
 
 int currentIndex;
-Future<String> listTrigger;
 
 class _HomePageState extends State<HomePage> {
   
@@ -28,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 15.0,
         child: Column(
           children: <Widget>[
-            Padding(padding: EdgeInsets.all(10.0),),
+            Padding(padding: EdgeInsets.all(12.0),),
             InkWell(
               child: ListTile(
                 leading: Icon(Icons.settings),
