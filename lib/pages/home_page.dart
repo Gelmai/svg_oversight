@@ -16,9 +16,7 @@ class _HomePageState extends State<HomePage> {
   void initState(){
     super.initState();
     loadFile().then((String value) {
-      setState(() {
-           
-            });
+      setState(() {});
     });
   }
 
@@ -26,6 +24,21 @@ class _HomePageState extends State<HomePage> {
   
   Widget build(BuildContext context) {
     return new Scaffold(
+      endDrawer: Drawer(
+        elevation: 15.0,
+        child: Column(
+          children: <Widget>[
+            Padding(padding: EdgeInsets.all(10.0),),
+            InkWell(
+              child: ListTile(
+                leading: Icon(Icons.settings),
+                title: Text('Settings'),
+              ),
+              onTap: () {Navigator.of(context).pushNamed('/Settings');},
+            )
+          ],
+        ),
+      ),
       floatingActionButton: new FloatingActionButton(
         onPressed: () => Navigator.of(context).pushNamed("/AddPerson"), 
         child: new Icon(Icons.add)), 
@@ -58,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                                     color: Colors.black,
                                     fontSize: 20.0
                                   ),
-                                  ),  
+                                ),  
                               ),
                               title: new Text("${masterList[index].lastName}, ${masterList[index].firstName}" , style: new TextStyle(fontSize: 30.0),)
                             )
