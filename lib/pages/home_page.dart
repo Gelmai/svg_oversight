@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/person.dart';
+import '../utils/mainmenu.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -23,21 +24,7 @@ class _HomePageState extends State<HomePage> {
   
   Widget build(BuildContext context) {
     return new Scaffold(
-      endDrawer: Drawer(
-        elevation: 15.0,
-        child: Column(
-          children: <Widget>[
-            Padding(padding: EdgeInsets.all(12.0),),
-            InkWell(
-              child: ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
-              ),
-              onTap: () {Navigator.of(context).pushNamed('/Settings');},
-            )
-          ],
-        ),
-      ),
+      endDrawer: MainMenu(),
       floatingActionButton: new FloatingActionButton(
         onPressed: () => Navigator.of(context).pushNamed("/AddPerson"), 
         child: new Icon(Icons.add)), 
