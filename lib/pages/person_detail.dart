@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './home_page.dart';
 import '../utils/person.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import '../utils/storage.dart';
 
 class PersonDetail extends StatefulWidget {
   @override
@@ -124,19 +125,25 @@ class _PersonDetailState extends State<PersonDetail> {
                   ],
                 ),
             ),
-            Text("List index: " + currentIndex.toString(), style: new TextStyle(fontSize: 30.0), ),
-            Text("Global Person Id: " + masterList[currentIndex].personId.toString(), style: new TextStyle(fontSize: 30.0), ),
+            //Text("List index: " + currentIndex.toString(), style: new TextStyle(fontSize: 30.0), ),
+            //Text("Global Person Id: " + masterList[currentIndex].personId.toString(), style: new TextStyle(fontSize: 30.0), ),
             Expanded(
               child: Container(
                 color: Colors.grey[300],
-                child: TextField(
-                  controller: textController,
-                  autocorrect: true,
-                  autofocus: false,
-                  maxLines: 10,
-                  decoration: InputDecoration(
-                    hintText: 'Notes', 
-                  ),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Text('Next call by: ')
+                      ],),
+                    TextField(
+                      controller: textController,
+                      autocorrect: true,
+                      autofocus: false,
+                      maxLines: 10,
+                      decoration: InputDecoration(hintText: 'Notes',),
+                    ),
+                  ]
                 ),
               ),
             )
