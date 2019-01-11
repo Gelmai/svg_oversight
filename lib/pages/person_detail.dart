@@ -129,7 +129,6 @@ class _PersonDetailState extends State<PersonDetail> {
             //Text("Global Person Id: " + masterList[currentIndex].personId.toString(), style: new TextStyle(fontSize: 30.0), ),
             Expanded(
               child: Container(
-                color: Colors.grey[300],
                 child: Column(
                   children: <Widget>[
                     Row(

@@ -14,14 +14,12 @@ class _HomePageState extends State<HomePage> {
   
   @override 
   void initState(){
+    setState(() {});
     super.initState();
-    loadFile().then((String value) {
-      setState(() {});
-    });
+
   }
 
   @override
-  
   Widget build(BuildContext context) {
     return new Scaffold(
       endDrawer: MainMenu(),
