@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MainMenu extends StatelessWidget {
+  // final bool isDarkTheme;
+  // final ThemeData themeData;
+  // MainMenu(this.themeData, this.isDarkTheme);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(

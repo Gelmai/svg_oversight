@@ -51,17 +51,13 @@ void addPerson(firstName, lastName) {
   globalPersonCounter++;
   newPerson.personId = globalPersonCounter;
   masterList.add(newPerson);
-  masterList.sort((a, b) {
-    return a.personLastName.toString().toLowerCase().compareTo(b.personLastName.toString().toLowerCase());
-  });
+  //used to sort at this location
   print(newPerson.firstName + " added!");
   saveFile();
 }
 
 void deletePerson(index) {
   masterList.removeAt(index);
-  masterList.sort((a, b) {
-    return a.personLastName.toString().toLowerCase().compareTo(b.personLastName.toString().toLowerCase());
-  });
+  //used to sort at this location
   saveFile();
 }
