@@ -2,22 +2,10 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import '../utils/person.dart';
 
-//String listSort;
+bool isDarkTheme = false;
+String listSort = 'Last Name A-Z';
+Brightness brightness = Brightness.light;
 
-
-ThemeData setDarkTheme(ThemeData themeData, bool _selection) {
-  if (_selection == true) {
-    themeData = ThemeData(
-    brightness: Brightness.dark
-    );
-    return themeData;
-  } else {
-    themeData = ThemeData(
-      brightness: Brightness.light
-    );
-    return themeData;
-  }
-}
 
 void setListSort(String _sort) {
   try {
@@ -56,9 +44,5 @@ void setListSort(String _sort) {
     print(_sort);
     print(e);
   }
-  
-}
-
-void setTheme() {
   
 }

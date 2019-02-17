@@ -3,32 +3,22 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'person.dart';
-//import '../utils/settings.dart';
+import '../utils/settings.dart';
 
-void saveFile() async {
-  // final String storedPersonKey = 'gelmaiSVGOversight';
-  // final String storedCounter = 'gelmaiSVGOversightCounter';
-  
-  // SharedPreferences sp = await (SharedPreferences.getInstance());
-  // sp.setString(storedPersonKey, json.encode(masterList));
-  // sp.setString(storedCounter, json.encode(globalPersonCounter));
-  // print(globalPersonCounter);
-  final file = await _localFile;
+void savePersons() async {
+  final file = await _localPersonsFile;
   file.writeAsString(json.encode(masterList));
 }
 
-Future<String> loadFile() async {
-  // final String storedPersonKey = 'gelmaiSVGOversight';
-  // final String storedCounter = 'gelmaiSVGOversightCounter';
+// void saveSettings() async {
+//   final file = await _localSettingsFile;
+//   file.writeAsString(json.encode(instanceSettings));
+// }
+
+Future<String> loadPersons() async {
 
   try {
-    // SharedPreferences sp = await (SharedPreferences.getInstance());
-    // await json
-    //   .decode(sp.getString(storedPersonKey))
-    //   .forEach((map) => masterList.add(new Person.fromJson(map)));
-  
-    // globalPersonCounter = await json.decode(sp.getString(storedCounter));
-    final file = await _localFile;
+    final file = await _localPersonsFile;
     final contents = await file.readAsString();
     await json
       .decode(contents)
@@ -50,7 +40,12 @@ Future<String> get _localPath async {
   return directory.path;
 }
 
-Future<File> get _localFile async {
+Future<File> get _localPersonsFile async {
   final path = await _localPath;
   return File('$path/persons.txt');
 }
+
+// Future<File> get _localSettingsFile async {
+//   final path = await _localPath;
+//   return File('$path/settings.txt');
+// }

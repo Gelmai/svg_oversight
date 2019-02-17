@@ -6,51 +6,49 @@ import './pages/settings_page.dart';
 import './utils/settings.dart';
 import './utils/storage.dart';
 
-void main() async{
-  bool isDarkTheme = false;
-  ThemeData themeData;
-  String listSort = 'Last Name A-Z';
-
-  loadFile().then((String value) {
-    setDarkTheme(themeData, isDarkTheme);
+void main() async {
+  loadPersons().then((String value) {
+  runApp(MyApp());
   });
-  runApp(MyApp(themeData, isDarkTheme, listSort));
 }
 
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
-  
-  final ThemeData themeData;
-  final bool isDarkTheme;
-  final String listSort;
-  MyApp(this.themeData, this.isDarkTheme, this.listSort);
+
+  MyApp();
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeData _themeData;
-  bool _isDarkTheme;
-  String _listSort;
-  
 
   @override
   void initState() {
-    _themeData = widget.themeData;
-    _isDarkTheme = widget.isDarkTheme;
-    _listSort = widget.listSort;
     super.initState();
+  }
+  
+  void setDarkTheme(BuildContext context) {
+  
+    if (isDarkTheme == true) {
+      brightness = Brightness.dark;
+
+    } else {
+      brightness = Brightness.light;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    
+    setDarkTheme(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: _themeData,
+      theme: ThemeData(brightness: brightness),
       home: HomePage(),
-      routes: <String, WidgetBuilder> {
+      routes: <String, WidgetBuilder>{
         "/AddPerson": (BuildContext context) => new AddPerson(),
         "/PersonDetail": (BuildContext context) => new PersonDetail(),
-        "/Settings": (BuildContext context) => new Settings(_themeData, _isDarkTheme, _listSort),
+        "/Settings": (BuildContext context) => new SettingsPage(),
       }
     );
   }

@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import '../utils/settings.dart';
 
-class Settings extends StatefulWidget {
+class SettingsPage extends StatefulWidget {
   @override
-  _SettingsState createState() => _SettingsState();
-  final bool isDarkTheme;
-  final ThemeData themeData;
-  final String listSort;
-  Settings(this.themeData, this.isDarkTheme, this.listSort);
+  _SettingsPageState createState() => _SettingsPageState();
+  // final bool isDarkTheme;
+  // final ThemeData themeData;
+  // final String listSort;
+  // SettingsPage(this.themeData, this.isDarkTheme, this.listSort);
 }
 
-class _SettingsState extends State<Settings> {
-  bool _isDarkTheme;
-  ThemeData _themeData;
+class _SettingsPageState extends State<SettingsPage> {
+  
+  // ThemeData _themeData;
   String _listSort;
 
   @override
   void initState() {
-    _isDarkTheme = widget.isDarkTheme;
-    _themeData = widget.themeData;
-    _listSort = widget.listSort;
+    
+    
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
@@ -38,12 +38,9 @@ class _SettingsState extends State<Settings> {
               ),
               Expanded(child: Text('Enable dark theme')),
               Switch(
-                  value: _isDarkTheme,
+                  value: isDarkTheme,
                   onChanged: (bool value) {
-                    setState(() {
-                      setDarkTheme(_themeData, value);
-                      _isDarkTheme = value;
-                    });
+                      isDarkTheme = value;
                   }),
             ],
           ),
@@ -55,7 +52,7 @@ class _SettingsState extends State<Settings> {
               ),
               Expanded(child: Text('List sort')),
               DropdownButton(
-                value: _listSort,
+                value: listSort,
                 items: <DropdownMenuItem>[
                   DropdownMenuItem(
                     child: Text('Last Name A-Z'),

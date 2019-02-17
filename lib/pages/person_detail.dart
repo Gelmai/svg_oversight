@@ -92,7 +92,7 @@ class _PersonDetailState extends State<PersonDetail> {
           masterList[currentIndex].lastShepherded = _pickedDate.toString();
           print(masterList[currentIndex].lastShepherded);
           _loadedDate = _pickedDate;
-          saveFile();
+          savePersons();
           Navigator.of(context).pop();
         },
       ),

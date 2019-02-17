@@ -7,9 +7,7 @@ import '../utils/storage.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => new _HomePageState();
-  // final bool isDarkTheme;
-  // ThemeData themeData;
-  //final String listSort;
+
   HomePage();
 }
 
