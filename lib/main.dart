@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
       routes: <String, WidgetBuilder>{
         "/AddPerson": (BuildContext context) => new AddPerson(),
         "/PersonDetail": (BuildContext context) => new PersonDetail(),
-        "/Settings": (BuildContext context) => new SettingsPage(setTheme: setTheme),
+        "/Settings": (BuildContext context) => new SettingsPage(setTheme: setLightTheme),
       }
     );
   }

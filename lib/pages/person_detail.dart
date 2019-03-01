@@ -70,7 +70,7 @@ class _PersonDetailState extends State<PersonDetail> {
                         },
                       ),
                       RaisedButton(
-                        child: Text('Delete', style: TextStyle(color: Colors.white),),
+                        child: Text('Delete', style: Theme.of(context).textTheme.button),
                         onPressed: () {
                           Navigator.of(context).popUntil(ModalRoute.withName('/'));
                           deletePerson(currentIndex);
@@ -116,7 +116,7 @@ class _PersonDetailState extends State<PersonDetail> {
                     ),
                     Container(width: 20.0,),
                     FlatButton(
-                      color: Colors.lightGreen[200],
+                      color: Colors.lightGreen[500],
                       child: Text('Pick Date'),
                       onPressed: () {
                         _selectDate(context);
