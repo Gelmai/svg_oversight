@@ -1,8 +1,7 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=C:\Users\Juju\flutter
-FLUTTER_APPLICATION_PATH=c:\Users\Juju\Documents\Flutter Development\svg_oversight
+FLUTTER_ROOT=/home/juju/Android/flutter
+FLUTTER_APPLICATION_PATH=/home/juju/AndroidStudioProjects/svg_oversight
 FLUTTER_TARGET=lib/main.dart
-FLUTTER_BUILD_MODE=debug
 FLUTTER_BUILD_DIR=build
-SYMROOT=${SOURCE_ROOT}/../build\ios
-FLUTTER_FRAMEWORK_DIR=C:\Users\Juju\flutter\bin\cache\artifacts\engine\ios
+SYMROOT=${SOURCE_ROOT}/../build/ios
+FLUTTER_FRAMEWORK_DIR=/home/juju/Android/flutter/bin/cache/artifacts/engine/ios

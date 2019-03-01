@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
 import '../utils/settings.dart';
+import '../main.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();
-  // final bool isDarkTheme;
-  // final ThemeData themeData;
-  // final String listSort;
-  // SettingsPage(this.themeData, this.isDarkTheme, this.listSort);
+
+  final Function() setTheme;
+  SettingsPage({Key key, @required this.setTheme}) : super(key: key) ;
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  
-  // ThemeData _themeData;
-  String _listSort;
 
   @override
   void initState() {
-    
     
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
@@ -40,7 +35,11 @@ class _SettingsPageState extends State<SettingsPage> {
               Switch(
                   value: isDarkTheme,
                   onChanged: (bool value) {
+                    setState(() {
                       isDarkTheme = value;
+                      widget.setTheme();
+                    });
+                    
                   }),
             ],
           ),
@@ -72,8 +71,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ],
                 onChanged: (dynamic value) {
                   setListSort(value);
-                  _listSort = value;
-                  setState(() {});
+                  setState(() {listSort = value;});
                 },
               )
             ],

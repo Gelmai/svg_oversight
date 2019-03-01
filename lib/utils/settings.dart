@@ -5,7 +5,7 @@ import '../utils/person.dart';
 bool isDarkTheme = false;
 String listSort = 'Last Name A-Z';
 Brightness brightness = Brightness.light;
-
+BuildContext appContext;
 
 void setListSort(String _sort) {
   try {

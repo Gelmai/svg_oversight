@@ -26,20 +26,23 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
   
-  void setDarkTheme(BuildContext context) {
-  
-    if (isDarkTheme == true) {
-      brightness = Brightness.dark;
-
-    } else {
-      brightness = Brightness.light;
-    }
+  setLightTheme() {
+    setState(() {
+      if (isDarkTheme == true) {
+        brightness = Brightness.dark;
+        } else {
+          brightness = Brightness.light;
+      }
+    });
   }
 
+  setTheme() {
+    setState(() {});
+  }
+  
   @override
   Widget build(BuildContext context) {
-    
-    setDarkTheme(context);
+    setLightTheme();  
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -48,7 +51,7 @@ class _MyAppState extends State<MyApp> {
       routes: <String, WidgetBuilder>{
         "/AddPerson": (BuildContext context) => new AddPerson(),
         "/PersonDetail": (BuildContext context) => new PersonDetail(),
-        "/Settings": (BuildContext context) => new SettingsPage(),
+        "/Settings": (BuildContext context) => new SettingsPage(setTheme: setTheme),
       }
     );
   }
