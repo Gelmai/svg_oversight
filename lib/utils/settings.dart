@@ -2,10 +2,27 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import '../utils/person.dart';
 
-bool isDarkTheme = false;
-String listSort = 'Last Name A-Z';
-Brightness brightness = Brightness.light;
-BuildContext appContext;
+
+
+class Settings {
+  bool isDarkTheme = false;
+  String listSort = 'Last Name A-Z';
+  Brightness brightness = Brightness.light;
+  
+
+  Settings.fromJson(Map<String, dynamic> p) {
+    isDarkTheme = p['isDarkTheme'];
+    listSort = p['listSort'];
+    brightness = p['brightness'];
+  }
+
+  Map<String, dynamic> toJson() => {
+    'isDarkTheme': isDarkTheme,
+    'listSort': listSort,
+    'brightness': brightness,
+  };
+}
+List<Settings> currentSettings = [];
 
 void setListSort(String _sort) {
   try {

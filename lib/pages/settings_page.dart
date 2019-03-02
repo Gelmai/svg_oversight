@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/settings.dart';
-import '../main.dart';
+import '../utils/storage.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -33,11 +33,12 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Expanded(child: Text('Enable dark theme')),
               Switch(
-                  value: isDarkTheme,
+                  value: currentSettings[0].isDarkTheme,
                   onChanged: (bool value) {
                     setState(() {
-                      isDarkTheme = value;
+                      currentSettings[0].isDarkTheme = value;
                       widget.setTheme();
+                      saveSettings();
                     });
                     
                   }),
@@ -51,7 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Expanded(child: Text('List sort')),
               DropdownButton(
-                value: listSort,
+                value: currentSettings[0].listSort,
                 items: <DropdownMenuItem>[
                   DropdownMenuItem(
                     child: Text('Last Name A-Z'),
@@ -72,7 +73,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 onChanged: (dynamic value) {
                   setListSort(value);
                   setState(() {
-                    listSort = value;
+                    currentSettings[0].listSort = value;
+                    saveSettings();
                   });
                 },
               )
