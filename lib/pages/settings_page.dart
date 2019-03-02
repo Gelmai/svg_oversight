@@ -71,7 +71,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 ],
                 onChanged: (dynamic value) {
                   setListSort(value);
-                  setState(() {listSort = value;});
+                  setState(() {
+                    listSort = value;
+                  });
                 },
               )
             ],

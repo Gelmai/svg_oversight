@@ -13,6 +13,7 @@ void setListSort(String _sort) {
     case 'Last Name A-Z': {
       masterList.sort((a, b) {
         a.lastName.toString().toLowerCase().compareTo(b.lastName.toString().toLowerCase());
+        print('N A-Z');
       });
       break;
     }
@@ -21,6 +22,7 @@ void setListSort(String _sort) {
       masterList.sort((a, b) {
         a.lastName.toString().toLowerCase().compareTo(b.lastName.toString().toLowerCase());
         masterList.reversed;
+        print('N Z-A');
       });
       break;
     }
@@ -28,6 +30,7 @@ void setListSort(String _sort) {
     case 'Shepherding Date A-Z': {
       masterList.sort((a, b) {
         a.lastShepherded.toString().toLowerCase().compareTo(b.lastShepherded.toString().toLowerCase());
+        print('S A-Z');
       });
       break;
     }
@@ -36,6 +39,7 @@ void setListSort(String _sort) {
       masterList.sort((a, b) {
         a.lastShepherded.toString().toLowerCase().compareTo(b.lastShepherded.toString().toLowerCase());
         masterList.reversed;
+        print('N Z-A');
       });
       break;
     }
