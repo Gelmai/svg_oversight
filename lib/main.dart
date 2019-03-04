@@ -24,16 +24,21 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    loadSettings();
+    try {
+      loadSettings();  
+    } catch (e) {
+      print(e);
+    }
+    
     super.initState();
   }
   
   setLightTheme() {
     setState(() {
-      if (currentSettings[0].isDarkTheme == true) {
-        currentSettings[0].brightness = Brightness.dark;
+      if (currentSettings.isDarkTheme == true) {
+        currentSettings.brightness = Brightness.dark;
         } else {
-          currentSettings[0].brightness = Brightness.light;
+          currentSettings.brightness = Brightness.light;
       }
     });
   }
@@ -45,11 +50,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     setLightTheme();
-    setListSort(currentSettings[0].listSort);
+    setListSort(currentSettings.listSort);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(brightness: currentSettings[0].brightness),
+      theme: ThemeData(brightness: currentSettings.brightness),
       home: HomePage(),
       routes: <String, WidgetBuilder>{
         "/AddPerson": (BuildContext context) => new AddPerson(),

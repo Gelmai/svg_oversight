@@ -21,8 +21,11 @@ class Settings {
     'listSort': listSort,
     'brightness': brightness,
   };
+
+  
 }
-List<Settings> currentSettings = [];
+Settings currentSettings;
+
 
 void setListSort(String _sort) {
   try {

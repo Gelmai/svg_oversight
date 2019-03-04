@@ -7,14 +7,12 @@ class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
 
   final Function() setTheme;
-  SettingsPage({Key key, @required this.setTheme}) : super(key: key) ;
+  SettingsPage({Key key, @required this.setTheme}) : super(key: key);
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
   @override
   void initState() {
-    
     super.initState();
   }
 
@@ -33,14 +31,13 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Expanded(child: Text('Enable dark theme')),
               Switch(
-                  value: currentSettings[0].isDarkTheme,
+                  value: currentSettings.isDarkTheme,
                   onChanged: (bool value) {
                     setState(() {
-                      currentSettings[0].isDarkTheme = value;
+                      currentSettings.isDarkTheme = value;
                       widget.setTheme();
                       saveSettings();
                     });
-                    
                   }),
             ],
           ),
@@ -52,7 +49,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Expanded(child: Text('List sort')),
               DropdownButton(
-                value: currentSettings[0].listSort,
+                value: currentSettings.listSort,
                 items: <DropdownMenuItem>[
                   DropdownMenuItem(
                     child: Text('Last Name A-Z'),
@@ -73,11 +70,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 onChanged: (dynamic value) {
                   setListSort(value);
                   setState(() {
-                    currentSettings[0].listSort = value;
+                    currentSettings.listSort = value;
                     saveSettings();
                   });
                 },
-              )
+              ),
             ],
           ),
           Divider(),

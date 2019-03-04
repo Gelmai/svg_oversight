@@ -32,17 +32,18 @@ Future<String> loadPersons() async {
 }
 
 Future<String> loadSettings() async {
-
+  
   try {
     final file = await _localSettingsFile;
     final contents = await file.readAsString();
     await json
       .decode(contents)
-      .forEach((map) => currentSettings.add(new Settings.fromJson(map)));
+      .forEach((map) => Settings.fromJson(map));
     listLoaded();
     return '';
   } catch (e) { 
     print(e);
+    print('Creating settings file');
     return '';
   }
 }
@@ -57,11 +58,11 @@ Future<String> get _localPath async {
 }
 
 Future<File> get _localPersonsFile async {
-  final path = await _localPath;
-  return File('$path/persons.txt');
+    final path = await _localPath;
+    return File('$path/persons.txt');
 }
 
 Future<File> get _localSettingsFile async {
   final path = await _localPath;
-  return File('$path/settings.txt');
+  return File('$path/settings.txt');  
 }
