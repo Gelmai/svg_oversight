@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:service_group/pages/home_page.dart';
 import 'dart:convert';
@@ -11,12 +12,6 @@ void savePersons() async {
   file.writeAsString(json.encode(masterList));
 }
 
-void saveSettings() async {
-  final file = await _localSettingsFile;
-  file.writeAsString(json.encode(currentSettings));
-  print(file);
-}
-
 Future<String> loadPersons() async {
   try {
     final file = await _localPersonsFile;
@@ -24,7 +19,7 @@ Future<String> loadPersons() async {
     await json
         .decode(contents)
         .forEach((map) => masterList.add(new Person.fromJson(map)));
-    listLoaded();
+
     return '';
   } catch (e) {
     print(e);
@@ -32,19 +27,29 @@ Future<String> loadPersons() async {
   }
 }
 
-Future<String> loadSettings() async {
-  //return '';
-  //print('Loading settings is disabled');
+void saveSettings() {
+  //final file = await _localSettingsFile;
+  //file.writeAsString(json.encode(currentSettings));
+  var settingsBox = Hive.box('settings');
+  settingsBox.put('isDarkTheme', currentSettings.isDarkTheme);
+  settingsBox.put('listSort', currentSettings.listSort);
+}
 
+Future<String> loadSettings() async {
   try {
-    final file = await _localSettingsFile;
-    final contents = await file.readAsString();
-    await json.decode(contents).forEach((map) => Settings.fromJson(map));
-    listLoaded();
+    //final file = await _localSettingsFile;
+    //final contents = await file.readAsString();
+    //await json.decode(contents).forEach((map) => Settings.fromJson(map));
+    var settingsBox = Hive.box('settings');
+    currentSettings.isDarkTheme = settingsBox.get('isDarkTheme');
+    currentSettings.listSort = settingsBox.get('listSort');
+
     return '';
   } catch (e) {
     print(e);
-    print('Loading settings failed');
+    print('Loading settings failed. Loading defaults.');
+    currentSettings.isDarkTheme = false;
+    currentSettings.listSort = 'Last Name A-Z';
     return '';
   }
 }
@@ -60,10 +65,15 @@ Future<File> get _localPersonsFile async {
 
 Future<File> get _localSettingsFile async {
   final path = await _localPath;
+
   return File('$path/settings.txt');
 }
 
 Future<String> get _localPath async {
-  final directory = await getApplicationDocumentsDirectory();
+  final directory = await getTemporaryDirectory();
   return directory.path;
+}
+
+void initHive() async {
+  final path = await _localPath;
 }

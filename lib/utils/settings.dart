@@ -1,24 +1,31 @@
 import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:service_group/pages/home_page.dart';
 import 'package:service_group/utils/storage.dart';
 import '../utils/person.dart';
+part 'settings.g.dart';
 
-class Settings {
-  bool isDarkTheme = false;
-  String listSort = 'Last Name A-Z';
-
+@HiveType(typeId: 0)
+class Settings extends HiveObject {
   Settings({this.isDarkTheme, this.listSort});
 
-  Settings.fromJson(Map<String, dynamic> p) {
-    isDarkTheme = p['isDarkTheme'] == 'false' ? false : true;
-    listSort = p['listSort'];
-  }
+  @HiveField(0)
+  bool isDarkTheme = false;
 
-  Map<String, dynamic> toJson() => {
-        'isDarkTheme': isDarkTheme.toString(),
+  @HiveField(1)
+  String listSort = 'Last Name A-Z';
+
+  /*
+  Settings.fromJson(Map<String, dynamic> json) {
+    isDarkTheme = json['isDarkTheme'];
+    listSort = json['listSort'];
+  }
+*/
+  Map<dynamic, dynamic> toJson() => {
+        'isDarkTheme': isDarkTheme,
         'listSort': listSort,
       };
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:service_group/utils/storage.dart';
 import '../utils/settings.dart';
 import 'home_page.dart';
 
@@ -31,8 +32,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Expanded(child: Text('Enable dark theme')),
               Switch(
-                  value: currentSettings
-                      .isDarkTheme, //currentSettings.isDarkTheme,
+                  value: currentSettings.isDarkTheme,
                   onChanged: (bool value) {
                     setState(() {
                       if (value == true) {
@@ -74,7 +74,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   setState(() {
                     currentSettings.listSort = value;
                     currentSettings.setListSort(value);
-                    /*saveSettings();*/
+                    saveSettings();
                   });
                 },
               ),
@@ -82,12 +82,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           Divider(),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.save),
-        onPressed: () {
-          Navigator.pushNamed(context, '/');
-        },
       ),
     );
   }

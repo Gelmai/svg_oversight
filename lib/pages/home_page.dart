@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:service_group/utils/settings.dart';
 import '../utils/person.dart';
 import '../utils/mainmenu.dart';
@@ -23,8 +24,33 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Settings hive = Settings();
+    hive.isDarkTheme = Hive.box('settings').get('isDarkTheme');
+    hive.listSort = Hive.box('settings').get('listSort');
     return new Scaffold(
         endDrawer: MainMenu(),
+        persistentFooterButtons: [
+          ElevatedButton(
+            onPressed: () => saveSettings(),
+            child: Text('Save'),
+          ),
+          ElevatedButton(
+            onPressed: () => loadSettings(),
+            child: Text('Load'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                print(
+                    'currentSettings.isDarkTheme = ${currentSettings.isDarkTheme}');
+                print('currentSettings.listSort = ${currentSettings.listSort}');
+                print('Hive.box(settings).isDarkTheme = ${hive.isDarkTheme}');
+                print('Hive.box(settings).listSort = ${hive.listSort}');
+              });
+            },
+            child: Text('Print'),
+          )
+        ],
         floatingActionButton: new FloatingActionButton(
             onPressed: () => Navigator.of(context).pushNamed("/AddPerson"),
             child: new Icon(Icons.add)),

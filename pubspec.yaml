@@ -9,10 +9,14 @@ dependencies:
   intl:
   path_provider: ^2.0.2
   provider:
+  hive: ^2.0.4
+  hive_flutter: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  hive_generator: ^1.1.0
+  build_runner: ^2.0.4
 
 environment:
   sdk: ">=2.10.0 <3.0.0"
