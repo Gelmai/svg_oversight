@@ -9,8 +9,8 @@ class Person {
 
   int length = 0;
 
-  Person(this.firstName, this.lastName, this.personId,
-      [this.lastShepherded, this.notes]);
+  Person(this.firstName, this.lastName, this.personId, this.lastShepherded,
+      [this.notes]);
 
   Person get nextPerson {
     if (currentPersonIndex < length) currentPersonIndex++;
@@ -46,7 +46,8 @@ int currentPersonIndex = 0;
 List<Person> masterList = [];
 
 void addPerson(firstName, lastName) {
-  Person newPerson = new Person(firstName, lastName, personCounter);
+  final date = DateTime.now().toString();
+  Person newPerson = new Person(firstName, lastName, personCounter, date);
   personCounter++;
   globalPersonCounter++;
   newPerson.personId = globalPersonCounter;

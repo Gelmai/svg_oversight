@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:service_group/pages/home_page.dart';
+import 'package:service_group/utils/settings.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'person.dart';
-import './settings.dart';
 
 void savePersons() async {
   final file = await _localPersonsFile;
@@ -43,7 +43,7 @@ Future<String> loadSettings() async {
     var settingsBox = Hive.box('settings');
     currentSettings.isDarkTheme = settingsBox.get('isDarkTheme');
     currentSettings.listSort = settingsBox.get('listSort');
-
+    ThemeNotifier();
     return '';
   } catch (e) {
     print(e);
@@ -62,18 +62,15 @@ Future<File> get _localPersonsFile async {
   final path = await _localPath;
   return File('$path/persons.txt');
 }
-
+/*
 Future<File> get _localSettingsFile async {
   final path = await _localPath;
 
   return File('$path/settings.txt');
 }
+*/
 
 Future<String> get _localPath async {
   final directory = await getTemporaryDirectory();
   return directory.path;
-}
-
-void initHive() async {
-  final path = await _localPath;
 }

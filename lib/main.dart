@@ -8,13 +8,12 @@ import './pages/person_detail.dart';
 import './pages/settings_page.dart';
 import './utils/settings.dart';
 import './utils/storage.dart';
-import 'package:path_provider/path_provider.dart';
 
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(SettingsAdapter());
   await Hive.openBox('settings');
-  loadSettings();
+  //loadSettings();
 
   loadPersons().then((String value) {
     runApp(ChangeNotifierProvider<ThemeNotifier>(
