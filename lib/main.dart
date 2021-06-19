@@ -16,9 +16,14 @@ void main() async {
   //loadSettings();
 
   loadPersons().then((String value) {
-    runApp(ChangeNotifierProvider<ThemeNotifier>(
-      create: (context) => ThemeNotifier(),
-      child: MyApp(),
+    runApp(MultiProvider(
+      providers: [
+        Provider<Settings>(create: (context) => Settings()),
+        Provider<ThemeNotifier>(create: (context) => ThemeNotifier())
+      ],
+      builder: (context, child) {
+        return MyApp();
+      },
     ));
   });
 }

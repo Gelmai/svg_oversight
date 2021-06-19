@@ -43,7 +43,6 @@ Future<String> loadSettings() async {
     var settingsBox = Hive.box('settings');
     currentSettings.isDarkTheme = settingsBox.get('isDarkTheme');
     currentSettings.listSort = settingsBox.get('listSort');
-    ThemeNotifier();
     return '';
   } catch (e) {
     print(e);

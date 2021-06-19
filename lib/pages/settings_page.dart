@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:service_group/utils/settings.dart';
 import 'package:service_group/utils/storage.dart';
 import 'home_page.dart';
 
@@ -18,6 +20,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final settings = context.watch<Settings>();
+    final theme = Provider.of<ThemeNotifier>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
@@ -35,9 +40,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   onChanged: (bool value) {
                     setState(() {
                       if (value == true) {
-                        widget.themeNotifier.setDarkTheme();
+                        //widget.themeNotifier.setDarkTheme();
+                        theme.setDarkTheme();
                       } else {
-                        widget.themeNotifier.setLightTheme();
+                        //widget.themeNotifier.setLightTheme();
+                        theme.setLightTheme();
                       }
                     });
                   })
@@ -70,11 +77,11 @@ class _SettingsPageState extends State<SettingsPage> {
                       value: 'Shepherding Date Z-A'),
                 ],
                 onChanged: (dynamic value) {
-                  setState(() {
-                    currentSettings.listSort = value;
-                    currentSettings.setListSort(value);
-                    saveSettings();
-                  });
+                  //  currentSettings.listSort = value;
+                  //  currentSettings.setListSort(value);
+                  settings.listSort = value;
+                  settings.setListSort(value);
+                  saveSettings();
                 },
               ),
             ],
