@@ -28,13 +28,18 @@ class Settings extends HiveObject with ChangeNotifier {
         'listSort': listSort,
       };
 
+  Stream<String> listOrder() async* {
+    var listOrder = Hive.box('settings');
+    yield listOrder.get('listSort');
+  }
+
   void setListSort(String _sort) {
     try {
       switch (_sort) {
         case 'Last Name A-Z':
           {
             masterList.sort((a, b) => a.lastName.compareTo(b.lastName));
-            notifyListeners();
+            listOrder();
             print('N A-Z');
             break;
           }
@@ -43,7 +48,7 @@ class Settings extends HiveObject with ChangeNotifier {
           {
             masterList.sort((a, b) => b.lastName.compareTo(a.lastName));
             print('N Z-A');
-            notifyListeners();
+            listOrder();
             break;
           }
 
@@ -51,7 +56,7 @@ class Settings extends HiveObject with ChangeNotifier {
           {
             masterList
                 .sort((a, b) => a.lastShepherded.compareTo(b.lastShepherded));
-            notifyListeners();
+            listOrder();
             break;
           }
 
@@ -59,14 +64,13 @@ class Settings extends HiveObject with ChangeNotifier {
           {
             masterList
                 .sort((a, b) => b.lastShepherded.compareTo(a.lastShepherded));
-            notifyListeners();
+            listOrder();
             break;
           }
 
         default:
           {
-            masterList.sort((a, b) => a.lastName.compareTo(b.lastName));
-            notifyListeners();
+            listOrder();
             return;
           }
       }
@@ -81,6 +85,7 @@ class ThemeNotifier with ChangeNotifier {
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
     primarySwatch: Colors.deepPurple,
+    primaryColor: Colors.deepPurple,
     toggleableActiveColor: Colors.deepPurple,
   );
   final lightTheme = ThemeData(

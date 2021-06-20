@@ -18,10 +18,13 @@ void main() async {
   loadPersons().then((String value) {
     runApp(MultiProvider(
       providers: [
-        Provider<Settings>(create: (context) => Settings()),
-        Provider<ThemeNotifier>(create: (context) => ThemeNotifier())
+        ChangeNotifierProvider<Settings>(create: (context) => Settings()),
+        ChangeNotifierProvider<ThemeNotifier>(
+            create: (context) => ThemeNotifier())
       ],
       builder: (context, child) {
+        final settings = context.watch<Settings>();
+        final theme = context.watch<ThemeNotifier>();
         return MyApp();
       },
     ));

@@ -36,15 +36,15 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Expanded(child: Text('Enable dark theme')),
               Switch(
-                  value: currentSettings.isDarkTheme,
+                  value: settings.isDarkTheme,
                   onChanged: (bool value) {
                     setState(() {
                       if (value == true) {
-                        //widget.themeNotifier.setDarkTheme();
                         theme.setDarkTheme();
+                        settings.isDarkTheme = true;
                       } else {
-                        //widget.themeNotifier.setLightTheme();
                         theme.setLightTheme();
+                        settings.isDarkTheme = false;
                       }
                     });
                   })
@@ -58,7 +58,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Expanded(child: Text('List sort')),
               DropdownButton(
-                value: currentSettings.listSort,
+                value: settings.listSort,
                 items: <DropdownMenuItem>[
                   DropdownMenuItem(
                     child: Text('Last Name A-Z'),
@@ -77,8 +77,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       value: 'Shepherding Date Z-A'),
                 ],
                 onChanged: (dynamic value) {
-                  //  currentSettings.listSort = value;
-                  //  currentSettings.setListSort(value);
                   settings.listSort = value;
                   settings.setListSort(value);
                   saveSettings();

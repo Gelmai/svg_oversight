@@ -15,7 +15,6 @@ class HomePage extends StatelessWidget {
     Settings hive = Settings();
     hive.isDarkTheme = Hive.box('settings').get('isDarkTheme');
     hive.listSort = Hive.box('settings').get('listSort');
-    final settingsProvider = Provider.of<Settings>(context);
 
     return Scaffold(
         endDrawer: MainMenu(),
@@ -50,8 +49,8 @@ class HomePage extends StatelessWidget {
             child: new Icon(Icons.add)),
         appBar: new AppBar(title: new Text("Group Members")),
         body: Consumer<Settings>(
-          builder: (context, settings, _) => FutureBuilder(
-              future: listLoaded(),
+          builder: (context, settings, _) => StreamBuilder(
+              stream: hive.listOrder(),
               // ignore: missing_return
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (masterList == null) {
