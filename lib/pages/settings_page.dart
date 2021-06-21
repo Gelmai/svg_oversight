@@ -75,8 +75,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       value: 'Shepherding Date Z-A'),
                 ],
                 onChanged: (dynamic value) {
-                  //  currentSettings.listSort = value;
-                  //  currentSettings.setListSort(value);
                   settings.listSort = value;
                   settings.setListSort(value);
                   saveSettings();
