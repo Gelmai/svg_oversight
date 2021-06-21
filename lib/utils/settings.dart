@@ -2,7 +2,6 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:service_group/pages/home_page.dart';
 import 'package:service_group/utils/storage.dart';
 import '../utils/person.dart';
 part 'settings.g.dart';
@@ -17,6 +16,8 @@ class Settings extends HiveObject with ChangeNotifier {
   @HiveField(1)
   String listSort = 'Last Name A-Z';
 
+  bool get darkThemeGet => isDarkTheme;
+  String get listSortGet => listSort;
   /*
   Settings.fromJson(Map<String, dynamic> json) {
     isDarkTheme = json['isDarkTheme'];
@@ -75,9 +76,7 @@ class Settings extends HiveObject with ChangeNotifier {
       print(e);
     }
   }
-}
 
-class ThemeNotifier with ChangeNotifier {
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
     primarySwatch: Colors.deepPurple,
@@ -90,33 +89,26 @@ class ThemeNotifier with ChangeNotifier {
 
   ThemeData _themeData;
 
-  ThemeNotifier() {
-    loadSettings();
-
-    if (currentSettings.isDarkTheme == true) {
-      _themeData = lightTheme;
-    } else {
+  ThemeData getTheme() {
+    if (isDarkTheme == true) {
       _themeData = darkTheme;
+    } else {
+      _themeData = lightTheme;
     }
-    notifyListeners();
+    return _themeData;
   }
-
-  ThemeData getTheme() => _themeData;
 
   void setDarkTheme() async {
     _themeData = darkTheme;
-    currentSettings.isDarkTheme = true;
-
+    isDarkTheme = true;
     saveSettings();
     notifyListeners();
   }
 
   void setLightTheme() async {
     _themeData = lightTheme;
-    currentSettings.isDarkTheme = false;
+    isDarkTheme = false;
     saveSettings();
     notifyListeners();
   }
-
-  void loadTheme() async {}
 }

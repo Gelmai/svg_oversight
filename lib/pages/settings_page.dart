@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:service_group/utils/settings.dart';
 import 'package:service_group/utils/storage.dart';
-import 'home_page.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
   _SettingsPageState createState() => _SettingsPageState();
 
-  SettingsPage({Key key, @required this.themeNotifier}) : super(key: key);
-  final themeNotifier;
+  SettingsPage({Key key}) : super(key: key);
 }
 
 class _SettingsPageState extends State<SettingsPage> {
@@ -20,8 +18,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final settings = context.watch<Settings>();
-    final theme = Provider.of<ThemeNotifier>(context);
+    final settings = Provider.of<Settings>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -36,17 +33,18 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Expanded(child: Text('Enable dark theme')),
               Switch(
-                  value: currentSettings.isDarkTheme,
+                  value: settings.isDarkTheme,
                   onChanged: (bool value) {
-                    setState(() {
-                      if (value == true) {
-                        //widget.themeNotifier.setDarkTheme();
-                        theme.setDarkTheme();
-                      } else {
-                        //widget.themeNotifier.setLightTheme();
-                        theme.setLightTheme();
-                      }
-                    });
+                    if (value == true) {
+                      //widget.themeNotifier.setDarkTheme();
+                      settings.setDarkTheme();
+                      settings.isDarkTheme = value;
+                    } else {
+                      //widget.themeNotifier.setLightTheme();
+                      settings.setLightTheme();
+                      settings.isDarkTheme = value;
+                    }
+                    setState(() {});
                   })
             ],
           ),
@@ -58,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               Expanded(child: Text('List sort')),
               DropdownButton(
-                value: currentSettings.listSort,
+                value: settings.listSortGet,
                 items: <DropdownMenuItem>[
                   DropdownMenuItem(
                     child: Text('Last Name A-Z'),
@@ -82,6 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   settings.listSort = value;
                   settings.setListSort(value);
                   saveSettings();
+                  setState(() {});
                 },
               ),
             ],

@@ -18,12 +18,11 @@ void main() async {
   loadPersons().then((String value) {
     runApp(MultiProvider(
       providers: [
-        Provider<Settings>(create: (context) => Settings()),
-        Provider<ThemeNotifier>(create: (context) => ThemeNotifier())
+        ChangeNotifierProvider<Settings>(
+          create: (context) => Settings(),
+        ),
       ],
-      builder: (context, child) {
-        return MyApp();
-      },
+      child: MyApp(),
     ));
   });
 }
@@ -31,17 +30,15 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeNotifier>(
-      builder: (context, themeNotifier, __) => MaterialApp(
+    return Consumer<Settings>(
+      builder: (context, settings, __) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: themeNotifier.getTheme(),
+          theme: settings.getTheme(),
           home: HomePage(),
           routes: <String, WidgetBuilder>{
             "/AddPerson": (BuildContext context) => new AddPerson(),
             "/PersonDetail": (BuildContext context) => new PersonDetail(),
-            "/Settings": (BuildContext context) => new SettingsPage(
-                  themeNotifier: themeNotifier,
-                ),
+            "/Settings": (BuildContext context) => new SettingsPage(),
           }),
     );
   }
