@@ -35,7 +35,7 @@ class _AddPersonState extends State<AddPerson> {
                 createSnackBar('Name fields are required!', context);
               } else {
                 addPerson(nameFirst, nameLast);
-                saveSettings(settings);
+                settings.saveSettings(settings);
                 Navigator.pushNamed(context, '/');
                 setState(() {});
               }

@@ -45,7 +45,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       settings.isDarkTheme = value;
                     }
                     setState(() {});
-                    saveSettings(settings);
+                    settings.saveSettings(settings);
                   })
             ],
           ),
@@ -78,8 +78,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 onChanged: (dynamic value) {
                   settings.listSort = value;
                   settings.setListSort(value);
-                  saveSettings(settings);
-                  settings.notifyListeners();
+                  settings.saveSettings(settings);
+                  //settings.notifyListeners();
                   setState(() {});
                 },
               ),

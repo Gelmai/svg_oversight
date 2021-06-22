@@ -26,16 +26,6 @@ Future<String> loadPersons() async {
   }
 }
 
-void saveSettings(Settings settings) {
-  //final file = await _localSettingsFile;
-  //file.writeAsString(json.encode(currentSettings));
-  var settingsBox = Hive.box('settings');
-
-  settingsBox.put('isDarkTheme', settings.isDarkTheme);
-  settingsBox.put('listSort', settings.listSort);
-  print(settingsBox.values);
-}
-
 Future<String> loadSettings() async {
   try {
     //final file = await _localSettingsFile;

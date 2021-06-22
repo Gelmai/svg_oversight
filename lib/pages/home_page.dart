@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
       endDrawer: MainMenu(),
       persistentFooterButtons: [
         ElevatedButton(
-          onPressed: () => saveSettings(settings),
+          onPressed: () => settings.saveSettings(settings),
           child: Text('Save'),
         ),
         ElevatedButton(
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
               print(
                   '${masterList[i].lastName} ${masterList[i].lastShepherded}');
             }
-            settings.notifyListeners();
+            settings.saveSettings(settings);
           },
           child: Text('Print'),
         )

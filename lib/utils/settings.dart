@@ -113,4 +113,14 @@ class Settings extends HiveObject with ChangeNotifier {
     isDarkTheme = false;
     notifyListeners();
   }
+
+  void saveSettings(Settings settings) {
+    //final file = await _localSettingsFile;
+    //file.writeAsString(json.encode(currentSettings));
+    var settingsBox = Hive.box('settings');
+
+    settingsBox.put('isDarkTheme', settings.isDarkTheme);
+    settingsBox.put('listSort', settings.listSort);
+    notifyListeners();
+  }
 }
