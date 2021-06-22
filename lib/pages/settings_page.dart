@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:service_group/utils/settings.dart';
-import 'package:service_group/utils/storage.dart';
 
 class SettingsPage extends StatefulWidget {
   @override

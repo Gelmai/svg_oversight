@@ -123,4 +123,8 @@ class Settings extends HiveObject with ChangeNotifier {
     settingsBox.put('listSort', settings.listSort);
     notifyListeners();
   }
+
+  void loadSettings(Settings settings) {
+    notifyListeners();
+  }
 }

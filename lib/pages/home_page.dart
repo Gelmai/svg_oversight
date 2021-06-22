@@ -7,7 +7,6 @@ import '../utils/mainmenu.dart';
 import '../utils/storage.dart';
 
 int currentIndex;
-Settings currentSettings = new Settings();
 
 class HomePage extends StatelessWidget {
   @override
@@ -25,15 +24,14 @@ class HomePage extends StatelessWidget {
           child: Text('Save'),
         ),
         ElevatedButton(
-          onPressed: () => loadSettings(),
+          onPressed: () => settings.loadSettings(settings),
           child: Text('Load'),
         ),
         ElevatedButton(
           onPressed: () {
             print('---------------------------');
-            print(
-                'currentSettings.isDarkTheme = ${currentSettings.isDarkTheme}');
-            print('currentSettings.listSort = ${currentSettings.listSort}');
+            print('currentSettings.isDarkTheme = ${settings.isDarkTheme}');
+            print('currentSettings.listSort = ${settings.listSort}');
             print('Hive.box(settings).isDarkTheme = ${hive.isDarkTheme}');
             print('Hive.box(settings).listSort = ${hive.listSort}');
 

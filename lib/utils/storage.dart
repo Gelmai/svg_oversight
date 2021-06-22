@@ -26,24 +26,6 @@ Future<String> loadPersons() async {
   }
 }
 
-Future<String> loadSettings() async {
-  try {
-    //final file = await _localSettingsFile;
-    //final contents = await file.readAsString();
-    //await json.decode(contents).forEach((map) => Settings.fromJson(map));
-    //var settingsBox = Hive.box('settings');
-    //currentSettings.isDarkTheme = settingsBox.get('isDarkTheme');
-    //currentSettings.listSort = settingsBox.get('listSort');
-    return '';
-  } catch (e) {
-    print(e);
-    //print('Loading settings failed. Loading defaults.');
-    //currentSettings.isDarkTheme = false;
-    //currentSettings.listSort = 'Last Name A-Z';
-    return '';
-  }
-}
-
 Future<String> listLoaded() async {
   return '';
 }
