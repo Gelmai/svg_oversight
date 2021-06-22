@@ -2,7 +2,6 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:service_group/utils/storage.dart';
 import '../utils/person.dart';
 part 'settings.g.dart';
 
@@ -106,14 +105,12 @@ class Settings extends HiveObject with ChangeNotifier {
   void setDarkTheme() async {
     _themeData = darkTheme;
     isDarkTheme = true;
-    saveSettings();
     notifyListeners();
   }
 
   void setLightTheme() async {
     _themeData = lightTheme;
     isDarkTheme = false;
-    saveSettings();
     notifyListeners();
   }
 }

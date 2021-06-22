@@ -12,14 +12,15 @@ import './utils/storage.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(SettingsAdapter());
-  await Hive.openBox('settings');
-  //loadSettings();
+  var initSettings = await Hive.openBox('settings');
 
   loadPersons().then((String value) {
     runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider<Settings>(
-          create: (context) => Settings(),
+          create: (context) => Settings(
+              isDarkTheme: initSettings.get('isDarkTheme'),
+              listSort: initSettings.get('listSort')),
         ),
       ],
       child: MyApp(),

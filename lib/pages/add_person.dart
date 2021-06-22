@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:service_group/utils/storage.dart';
 import '../utils/person.dart';
 
@@ -11,7 +12,6 @@ class _AddPersonState extends State<AddPerson> {
   String nameFirst = "";
   String nameLast = "";
   final _formKey = GlobalKey<FormState>();
-
   void createSnackBar(String message, BuildContext context) {
     final snackBar = SnackBar(
       content: Text(message),
@@ -22,6 +22,7 @@ class _AddPersonState extends State<AddPerson> {
 
   @override
   Widget build(BuildContext context) {
+    final settings = Provider.of(context);
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("New goup member"),
@@ -34,7 +35,7 @@ class _AddPersonState extends State<AddPerson> {
                 createSnackBar('Name fields are required!', context);
               } else {
                 addPerson(nameFirst, nameLast);
-                saveSettings();
+                saveSettings(settings);
                 Navigator.pushNamed(context, '/');
                 setState(() {});
               }

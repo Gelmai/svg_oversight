@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:service_group/pages/home_page.dart';
 import 'package:service_group/utils/settings.dart';
 import 'dart:convert';
 import 'dart:async';
@@ -27,12 +26,14 @@ Future<String> loadPersons() async {
   }
 }
 
-void saveSettings() {
+void saveSettings(Settings settings) {
   //final file = await _localSettingsFile;
   //file.writeAsString(json.encode(currentSettings));
   var settingsBox = Hive.box('settings');
-  settingsBox.put('isDarkTheme', currentSettings.isDarkTheme);
-  settingsBox.put('listSort', currentSettings.listSort);
+
+  settingsBox.put('isDarkTheme', settings.isDarkTheme);
+  settingsBox.put('listSort', settings.listSort);
+  print(settingsBox.values);
 }
 
 Future<String> loadSettings() async {

@@ -16,6 +16,7 @@ class MainMenu extends StatelessWidget {
               title: Text('Settings'),
             ),
             onTap: () {
+              Navigator.pop(context);
               Navigator.of(context).pushNamed('/Settings');
             },
           )
