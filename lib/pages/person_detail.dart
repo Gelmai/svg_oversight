@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import './home_page.dart';
+import 'package:hive/hive.dart';
+import 'package:service_group/utils/settings.dart';
 import '../utils/person.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class PersonDetail extends StatefulWidget {
   @override
   _PersonDetailState createState() => new _PersonDetailState();
+
+  PersonDetail({this.index});
+  final int index;
 }
 
 class _PersonDetailState extends State<PersonDetail> {
   DateTime _pickedDate;
   DateTime _loadedDate;
-  TextEditingController textController =
-      TextEditingController(text: masterList[currentIndex].notes);
 
   Future<Null> _selectDate(BuildContext context) async {
     initializeDateFormatting();
@@ -32,81 +34,70 @@ class _PersonDetailState extends State<PersonDetail> {
 
   @override
   void initState() {
-    if (masterList[currentIndex].lastShepherded == null) {
+    final person = Hive.box('persons').getAt(widget.index);
+
+    if (person.lastShepherded == null) {
       _loadedDate = DateTime.now();
       _pickedDate = DateTime.now();
     } else {
-      _loadedDate = DateTime.parse(masterList[currentIndex].lastShepherded);
-      _pickedDate = DateTime.parse(masterList[currentIndex].lastShepherded);
+      _loadedDate = DateTime.parse(person.lastShepherded);
+      _pickedDate = DateTime.parse(person.lastShepherded);
     }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    print('Notes: ${masterList[currentIndex].notes}');
-    print('Last shepherded: ${masterList[currentIndex].lastShepherded}');
+    final Person person = Hive.box('persons').getAt(widget.index);
+    TextEditingController textController =
+        TextEditingController(text: person.notes);
+    print('Notes: ${person.notes}');
+    print('Last shepherded: ${person.lastShepherded}');
     print('Initial loaded date: $_loadedDate');
     print('Initial picked date: $_pickedDate');
 
     return new Scaffold(
-        appBar: new AppBar(
-          centerTitle: true,
-          title: new Text(masterList[currentIndex].firstName +
-              " " +
-              masterList[currentIndex].lastName),
-          actions: <Widget>[
-            IconButton(
-              //DELETE Button
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Delete person?'),
-                        content: Text('This cannot be undone.'),
-                        actions: <Widget>[
-                          TextButton(
-                            child: Text('Cancel'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                          ElevatedButton(
-                            child: Text('Delete',
-                                style: Theme.of(context).textTheme.button),
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/');
-                              /*Navigator.of(context)
+      appBar: new AppBar(
+        centerTitle: true,
+        title: new Text(person.firstName + " " + person.lastName),
+        actions: <Widget>[
+          IconButton(
+            //DELETE Button
+            icon: Icon(Icons.delete),
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Delete person?'),
+                      content: Text('This cannot be undone.'),
+                      actions: <Widget>[
+                        TextButton(
+                          child: Text('Cancel'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        ElevatedButton(
+                          child: Text('Delete',
+                              style: Theme.of(context).textTheme.button),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/');
+                            /*Navigator.of(context)
                                   .popUntil(ModalRoute.withName('/'));*/
-                              deletePerson(currentIndex);
-                              //setState(() {});
-                            },
-                          )
-                        ],
-                      );
-                    });
-              },
-            )
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          //SAVE Button
-          child: Icon(Icons.save),
-          onPressed: () {
-            setState(() {
-              masterList[currentIndex].notes = textController.text;
-              masterList[currentIndex].lastShepherded = _pickedDate.toString();
-              print(masterList[currentIndex].lastShepherded);
-              _loadedDate = _pickedDate;
-              /*savePersons();*/
-            });
-            Navigator.of(context).pop();
-          },
-        ),
-        body: new Center(
-            child: Column(
+                            person.deletePerson(widget.index);
+                            //setState(() {});
+                          },
+                        )
+                      ],
+                    );
+                  });
+            },
+          )
+        ],
+      ),
+      body: new Center(
+        child: Column(
           children: <Widget>[
             Container(
               color: Colors.blueGrey,
@@ -148,36 +139,52 @@ class _PersonDetailState extends State<PersonDetail> {
                 ],
               ),
             ),
-            //Text("List index: " + currentIndex.toString(), style: new TextStyle(fontSize: 30.0), ),
-            //Text("Global Person Id: " + masterList[currentIndex].personId.toString(), style: new TextStyle(fontSize: 30.0), ),
             Expanded(
               child: Container(
-                child: Column(children: <Widget>[
-                  Padding(padding: EdgeInsets.only(left: 5.0, top: 5.0)),
-                  Row(
-                    children: <Widget>[
-                      Padding(padding: EdgeInsets.only(left: 5.0)),
-                      Text(
-                          'Next call by: ${_pickedDate.month > 6 ? _pickedDate.month - 6 : _pickedDate.month + 6}/${_pickedDate.day}/${_pickedDate.month > 6 ? _pickedDate.year + 1 : _pickedDate.year}'),
-                    ],
-                  ),
-                  Divider(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                    child: TextField(
-                      controller: textController,
-                      autocorrect: true,
-                      autofocus: false,
-                      maxLines: 10,
-                      decoration: InputDecoration(
-                        hintText: 'Enter notes here...',
+                child: Column(
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.only(left: 5.0, top: 5.0)),
+                    Row(
+                      children: <Widget>[
+                        Padding(padding: EdgeInsets.only(left: 5.0)),
+                        Text(
+                            'Next call by: ${_pickedDate.month > 6 ? _pickedDate.month - 6 : _pickedDate.month + 6}/${_pickedDate.day}/${_pickedDate.month > 6 ? _pickedDate.year + 1 : _pickedDate.year}'),
+                      ],
+                    ),
+                    Divider(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: TextField(
+                        controller: textController,
+                        autocorrect: true,
+                        autofocus: false,
+                        maxLines: 10,
+                        decoration: InputDecoration(
+                          hintText: 'Enter notes here...',
+                        ),
                       ),
                     ),
-                  ),
-                ]),
+                  ],
+                ),
               ),
             )
           ],
-        )));
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        //SAVE Button
+        child: Icon(Icons.save),
+        onPressed: () {
+          setState(() {
+            person.notes = textController.text;
+            person.lastShepherded = _pickedDate.toString();
+            print(person.lastShepherded);
+            _loadedDate = _pickedDate;
+          });
+
+          Navigator.of(context).pop();
+        },
+      ),
+    );
   }
 }

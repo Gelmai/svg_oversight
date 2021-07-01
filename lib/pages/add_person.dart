@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:service_group/utils/settings.dart';
 import '../utils/person.dart';
 
 class AddPerson extends StatefulWidget {
@@ -21,7 +22,9 @@ class _AddPersonState extends State<AddPerson> {
 
   @override
   Widget build(BuildContext context) {
-    final settings = Provider.of(context);
+    final settings = Provider.of<Settings>(context);
+    final personNotifier = Provider.of<Person>(context);
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("New goup member"),
@@ -33,7 +36,7 @@ class _AddPersonState extends State<AddPerson> {
               if (nameFirst == "" || nameLast == "") {
                 createSnackBar('Name fields are required!', context);
               } else {
-                addPerson(nameFirst, nameLast);
+                personNotifier.addPerson(nameFirst, nameLast);
                 settings.saveSettings(settings);
                 Navigator.pushNamed(context, '/');
                 setState(() {});

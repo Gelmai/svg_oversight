@@ -1,29 +1,30 @@
+/*
 import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:service_group/utils/settings.dart';
 import 'dart:convert';
 import 'dart:async';
-import 'person.dart';
 
-void savePersons() async {
-  final file = await _localPersonsFile;
-  file.writeAsString(json.encode(masterList));
-}
+//void savePersons() async {
+//  final file = await _localPersonsFile;
+//  file.writeAsString(json.encode(masterList));
+//}
 
 Future<String> loadPersons() async {
-  try {
-    final file = await _localPersonsFile;
-    final contents = await file.readAsString();
-    await json
-        .decode(contents)
-        .forEach((map) => masterList.add(new Person.fromJson(map)));
-
-    return '';
-  } catch (e) {
-    print(e);
-    return '';
-  }
+  //try {
+  //  final file = await _localPersonsFile;
+  //  final contents = await file.readAsString();
+  //  await json
+  //      .decode(contents)
+  //      .forEach((map) => masterList.add(new Person.fromJson(map)));
+  //
+  //  return '';
+  //} catch (e) {
+  //  print(e);
+  //  return '';
+  //}
+  return '';
 }
 
 Future<String> listLoaded() async {
@@ -46,3 +47,4 @@ Future<String> get _localPath async {
   final directory = await getTemporaryDirectory();
   return directory.path;
 }
+*/

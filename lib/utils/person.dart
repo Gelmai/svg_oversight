@@ -1,64 +1,53 @@
-import 'package:service_group/utils/storage.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:hive/hive.dart';
+part 'person.g.dart';
 
-class Person {
+@HiveType(typeId: 1)
+class Person extends HiveObject with ChangeNotifier {
+  @HiveField(0)
   String firstName = "";
+  @HiveField(1)
   String lastName = "";
+  @HiveField(2)
   String lastShepherded = "";
+  @HiveField(3)
   String notes = "";
-  int personId;
 
-  int length = 0;
-
-  Person(this.firstName, this.lastName, this.personId, this.lastShepherded,
-      [this.notes]);
-
-  Person get nextPerson {
-    if (currentPersonIndex < length) currentPersonIndex++;
-    return masterList[currentPersonIndex];
-  }
+  Person([this.firstName, this.lastName, this.lastShepherded, this.notes]);
 
   Person.fromJson(Map<String, dynamic> p) {
     firstName = p['firstName'];
     lastName = p['lastName'];
     lastShepherded = p['lastShepherded'];
     notes = p['notes'];
-    personId = p['personId'];
   }
 
-  //  String get personFirstName => firstName;
-  //  String get personLastName => lastName;
-  //  String get personLastShepherded => lastShepherded.toString();
-  //  String get personNotes => notes;
-  //  String get personStoredId => personId.toString();
+  String get personFirstName => firstName;
+  String get personLastName => lastName;
+  String get personLastShepherded => lastShepherded.toString();
+  String get personNotes => notes;
 
   Map<String, dynamic> toJson() => {
         'firstName': firstName,
         'lastName': lastName,
         'lastShepherded': lastShepherded,
         'notes': notes,
-        'personId': personId,
       };
-}
 
-int globalPersonCounter = 0;
-int personCounter = 0;
-int currentPersonIndex = 0;
-List<Person> masterList = [];
+  void addPerson(firstName, lastName) {
+    final date = DateTime.now().toString();
+    final persons = Hive.box('persons');
+    Person newPerson = new Person(firstName, lastName, date);
+    persons.add(newPerson);
+    //masterList.add(newPerson);
+    //used to sort at this location
+    print(newPerson.firstName + " added!");
+  }
 
-void addPerson(firstName, lastName) {
-  final date = DateTime.now().toString();
-  Person newPerson = new Person(firstName, lastName, personCounter, date);
-  personCounter++;
-  globalPersonCounter++;
-  newPerson.personId = globalPersonCounter;
-  masterList.add(newPerson);
-  //used to sort at this location
-  print(newPerson.firstName + " added!");
-  savePersons();
-}
-
-void deletePerson(index) {
-  masterList.removeAt(index);
-  //used to sort at this location
-  //savePersons();
+  void deletePerson(index) {
+    //masterList.removeAt(index);
+    //used to sort at this location
+    final persons = Hive.box('persons');
+    persons.deleteAt(index);
+  }
 }

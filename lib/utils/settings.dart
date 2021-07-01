@@ -34,6 +34,9 @@ class Settings extends HiveObject with ChangeNotifier {
   }
 
   void setListSort(String _sort) {
+    var persons = Hive.box('persons');
+    List<Person> masterList = persons.values.toList() as List<Person>;
+
     try {
       switch (_sort) {
         case 'Last Name A-Z':
@@ -67,13 +70,17 @@ class Settings extends HiveObject with ChangeNotifier {
             listOrder();
             break;
           }
-
-        default:
-          {
-            listOrder();
-            return;
-          }
       }
+      persons.clear();
+      //persons.addAll(masterList);
+
+      for (var i = 0; i < masterList.length; i++) {
+        persons.putAt(i, masterList[i] as Person);
+        print(persons.getAt(i).lastName);
+        print(masterList[i]);
+      }
+
+      notifyListeners();
     } catch (e) {
       print(_sort);
       print(e);
